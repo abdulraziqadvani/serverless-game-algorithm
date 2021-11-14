@@ -1,113 +1,70 @@
-<!--
-title: 'AWS Simple HTTP Endpoint example in NodeJS'
-description: 'This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.'
-layout: Doc
-framework: v2
-platform: AWS
-language: nodeJS
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# Game Algorithm - Serverless based
 
-# Serverless Framework Node HTTP API on AWS
+## Problem Statement
 
-This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.
+This algorithm solves the problem where a player has to attack an enemy, and have to create an army for an attack.
+Army may consist of Spearmen, Swordsmen, and Archers.
 
-This template does not include any kind of persistence (database). For more advanced examples, check out the [serverless/examples repository](https://github.com/serverless/examples/) which includes Typescript, Mongo, DynamoDB and other examples.
+___
 
-## Usage
+## Installation
 
-### Deployment
-
-```
-$ serverless deploy
-```
-
-After deploying, you should see output similar to:
+First it is required to install Serverless framework locally by this command.
 
 ```bash
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Creating Stack...
-Serverless: Checking Stack create progress...
-........
-Serverless: Stack create finished...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service aws-node-http-api.zip file to S3 (711.23 KB)...
-Serverless: Validating template...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-.................................
-Serverless: Stack update finished...
-Service Information
-service: serverless-http-api
-stage: dev
-region: us-east-1
-stack: serverless-http-api-dev
-resources: 12
-api keys:
-  None
-endpoints:
-  ANY - https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
-functions:
-  api: serverless-http-api-dev-hello
-layers:
-  None
+npm install -g serverless
 ```
 
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/).
-
-### Invocation
-
-After successful deployment, you can call the created application via HTTP:
+After installing serverless framework, install package dependencies:
 
 ```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
+npm install
 ```
 
-Which should result in response similar to the following (removed `input` content for brevity):
+___
 
-```json
-{
-  "message": "Go Serverless v2.0! Your function executed successfully!",
-  "input": {
-    ...
-  }
-}
-```
+### Local Development
 
-### Local development
-
-You can invoke your function locally by using the following command:
+We will be using SLS Offline Plugin to simulate the AWS Lambda and API Gateway behavior and to run an API locally. In order to do that, execute the following command:
 
 ```bash
-serverless invoke local --function hello
-```
-
-Which should result in response similar to the following:
-
-```
-{
-  "statusCode": 200,
-  "body": "{\n  \"message\": \"Go Serverless v2.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
-}
-```
-
-
-Alternatively, it is also possible to emulate API Gateway and Lambda locally by using `serverless-offline` plugin. In order to do that, execute the following command:
-
-```bash
-serverless plugin install -n serverless-offline
-```
-
-It will add the `serverless-offline` plugin to `devDependencies` in `package.json` file as well as will add it to `plugins` in `serverless.yml`.
-
-After installation, you can start local emulation with:
-
-```
 serverless offline
 ```
 
-To learn more about the capabilities of `serverless-offline`, please refer to its [GitHub repository](https://github.com/dherault/serverless-offline).
+And invoke an API through this endpoint:
+
+```bash
+  http://localhost:3000/army/100
+```
+
+Where 100 in the URL is the number of soldiers needed.
+
+___
+
+## Project Structure
+
+* `__tests__` - contains unit tests.
+* `army` - contains the logic of the algorithm to create an army.
+  * `interfaces` - contains the interface of the algorithm.
+  * `helpers` - contains the helpers of the algorithm.
+  * `create.ts` - contains the main handler to invoke an API and handles the logic of the algorithm.
+* `events` - contains the events to be used by the serverless framework to mock an API Gateway to request payload.
+* `serverless.yml` - contains the configuration of the serverless framework.
+* `package.json` - contains the project metadata and dependencies to be installed.
+
+## Testing
+
+Jest is configured in order to handle the Unit Tests of our algorithm.
+
+Run this command in order to run the unit tests:
+
+```bash
+npm run test
+```
+
+___
+
+## Code Coverage
+
+All functions and business logics of a code has been covered by unit tests.
+![alt text](code_coverage.png "Code Coverage")
