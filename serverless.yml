@@ -1,0 +1,19 @@
+service: serverless-solution
+frameworkVersion: '2 || 3'
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: '20201221'
+
+functions:
+  createArmy:
+    handler: army/create.index
+    events:
+      - httpApi:
+          path: /army/{armyCount}
+          method: get
