@@ -83,6 +83,9 @@ Run this command in order to run the unit tests:
 npm run test
 ```
 
+Which will result in the following output:
+![alt text](unit_test.png "Unit Test")
+
 ___
 
 ## Code Coverage
