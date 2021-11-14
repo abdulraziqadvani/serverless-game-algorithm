@@ -31,13 +31,34 @@ We will be using SLS Offline Plugin to simulate the AWS Lambda and API Gateway b
 serverless offline
 ```
 
-And invoke an API through this endpoint:
+And invoke an API through this endpoint (Where 100 in the URL is the number of soldiers needed):
 
 ```bash
   http://localhost:3000/army/100
 ```
 
-Where 100 in the URL is the number of soldiers needed.
+Which should result in response similar to the following:
+
+```json
+{
+    "success": true,
+    "data": [
+        {
+            "type": "spearmen",
+            "count": 53
+        },
+        {
+            "type": "swordsmen",
+            "count": 10
+        },
+        {
+            "type": "archer",
+            "count": 37
+        }
+    ],
+    "message": "Army is ready to attack 🗡"
+}
+```
 
 ___
 
