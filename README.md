@@ -23,7 +23,7 @@ npm install
 
 ___
 
-### Local Development
+## Local Development
 
 We will be using SLS Offline Plugin to simulate the AWS Lambda and API Gateway behavior and to run an API locally. In order to do that, execute the following command:
 
